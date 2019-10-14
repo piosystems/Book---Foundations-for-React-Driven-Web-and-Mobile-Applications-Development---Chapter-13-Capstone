@@ -4,21 +4,21 @@
    "port": 5432,
    "username": "postgres",
    "password": "bookexampledbpassword",
-   "database": "test",
+   "database": "capstoneprojectbook1",
    "synchronize": true,
    "logging": false,
    "entities": [
-      "build/entity/**/*.js"
+      "build/model/entity/**/*.js", "build/model/data-mapper/**/*.js"
    ],
    "migrations": [
-      "build/migration/**/*.js"
+      "build/model/migration/**/*.js"
    ],
    "subscribers": [
-      "build/subscriber/**/*.js"
+      "build/model/subscriber/**/*.js"
    ],
    "cli": {
-      "entitiesDir": "build/entity",
-      "migrationsDir": "build/migration",
-      "subscribersDir": "build/subscriber"
+      "entitiesDir": "build/model/entity",
+      "migrationsDir": "build/model/migration",
+      "subscribersDir": "build/model/subscriber"
    }
 }

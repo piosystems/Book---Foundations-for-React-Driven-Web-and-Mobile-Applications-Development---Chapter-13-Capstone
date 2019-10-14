@@ -1,8 +1,10 @@
-import "reflect-metadata";
-import {createConnection} from "typeorm";
-import {User} from "./entity/User";
+//import "reflect-metadata";
+//import {createConnection} from "typeorm";
+import connection from "./model/connection/connection";
+import {User} from "./model/entity/User";
 
-createConnection().then(async connection => {
+//createConnection().then(async connection => {
+connection.then(async connection => {
 
     console.log("Inserting a new user into the database...");
     const user = new User();
