@@ -10,6 +10,10 @@
       "outDir": "./build",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true
-   }
+      "sourceMap": true,
+      "esModuleInterop": true
+   },
+   "include": [
+      "src", "src/static/js/all.min.js"
+    ]
 }

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block body %}
+{# Comment: The extra style here is to force footer to always be at the bottom 
+  even if content is not much. See https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
+#}
+<body style="display: flex; min-height: 100vh; flex-direction: column;">
+  {%include "guest-website/navigation.html"%}
+  <section class="section">
+      <nav class="container breadcrumb" aria-label="breadcrumbs">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">FAQs</a></li>
+          </ul>
+        </nav>
+  </section>
+  <!--Below nav, start sections. See https://bulma.io/documentation/layout/section/.
+  We will make this first section a hero i.e. big bold. See https://bulma.io/documentation/layout/hero/-->
+  <section class="section" style="flex: 1;">
+    <div class="container content is-medium">
+      <h2>{{ title }}</h2>
+      {% for fAQ in fAQs %}
+        <h3>{{ fAQ.question }}</h3>
+        <p>{{ fAQ.answer}}</p>
+      {% else %}
+        <p>No FAQs are available at the moment</p>
+      {% endfor %}
+    </div>
+  </section>
+  {%include "guest-website/footer.html" %}
+</body>
+{% endblock body %}
+

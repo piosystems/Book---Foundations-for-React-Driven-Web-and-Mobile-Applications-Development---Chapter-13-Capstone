@@ -1,18 +1,23 @@
 {
-   "name": "capstone-project-book1",
+   "name": "capstone-project-book",
    "version": "1.0.0",
-   "description": "Capstone project for book1",
+   "description": "Capstone project for book",
    "main": "index.js",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "ts-node src/index.ts",
       "type-check": "tsc --noEmit",
       "build": "tsc",
-      "start-with-node": "node build/index.js"
+      "start-with-node": "node build/index.js",
+      "copy-html-and-static-files": "copyfiles -u 1 src/**/*.html src/**/*.css src/**/*.js src/**/img/**/* build/",
+      "css-build": "node-sass --omit-source-map-url src/bulma/sass/capstone-project-book.scss src/bulma/css/capstone-project-book.css && node-sass --omit-source-map-url src/bulma/sass/capstone-project-book-customize.scss src/bulma/css/capstone-project-book-customize.css",
+      "minify": "gulp",
+      "build-all-no-css": "npm run build && npm run copy-html-and-static-files",
+      "build-all": "npm run css-build && npm run minify && npm run build && npm run copy-html-and-static-files"
    },
    "repository": {
       "type": "git",
-      "url": "git+https://github.com/piosystems/capstone-project-book1.git"
+      "url": "git+https://github.com/piosystems/capstone-project-book.git"
    },
    "keywords": [
       "Web",
@@ -25,16 +30,41 @@
    "author": "Pius Onobhayedo",
    "license": "MIT",
    "bugs": {
-      "url": "https://github.com/piosystems/capstone-project-book1/issues"
+      "url": "https://github.com/piosystems/capstone-project-book/issues"
    },
-   "homepage": "https://github.com/piosystems/capstone-project-book1#readme",
+   "homepage": "https://github.com/piosystems/capstone-project-book#readme",
    "devDependencies": {
+      "@types/bcrypt": "^3.0.0",
+      "@types/formidable": "^1.0.31",
+      "@types/koa": "^2.0.51",
+      "@types/koa-static": "^4.0.1",
       "@types/node": "^12.7.12",
+      "@types/nodemailer": "^6.2.2",
+      "@types/nunjucks": "^3.1.2",
+      "bulma": "^0.8.0",
+      "copyfiles": "^2.1.1",
+      "gulp": "^4.0.2",
+      "gulp-clean-css": "^4.2.0",
+      "gulp-rename": "^1.4.0",
+      "node-sass": "^4.13.0",
       "ts-node": "3.3.0",
       "typescript": "^3.3.3333"
    },
    "dependencies": {
+      "@fortawesome/fontawesome-free": "^5.11.2",
+      "bcrypt": "^3.0.7",
+      "bulma-extensions": "^6.2.7",
+      "class-validator": "^0.10.2",
+      "formidable": "^1.2.1",
+      "koa": "^2.11.0",
+      "koa-body": "^4.1.1",
+      "koa-router-find-my-way": "^3.1.5",
+      "koa-static": "^5.0.0",
+      "nodemailer": "^6.3.1",
+      "nunjucks": "^3.2.0",
       "pg": "^7.3.0",
+      "react": "^16.12.0",
+      "react-dom": "^16.12.0",
       "reflect-metadata": "^0.1.10",
       "typeorm": "0.2.19"
    }

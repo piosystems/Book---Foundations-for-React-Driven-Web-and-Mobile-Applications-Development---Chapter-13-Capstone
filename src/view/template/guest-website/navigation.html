@@ -1,0 +1,75 @@
+<!-- using bulma classes. See https://bulma.io/documentation/components/navbar/-->
+
+<nav class="navbar is-black" role="navigation" aria-label="main navigation">
+  <!--navbar-brand is for the logo and hamburger menu for narrow screens-->
+  <div class="container"> <!-- This makes the navigator left and right align with other containers in the page-->
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/piosystems-logo.png">
+      </a>
+      <!--Notice the data-target below in the hamburger menu. Set is-active when on mobile-->
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="bookExampleMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <!--Notice the id="bookExampleMenu" here. This makes this div's menuitems the data-target for the navbar-burger above-->
+    <div id="bookExampleMenu" class="navbar-menu">
+      <!--navbar-start below is for a set of menu items that are left oriented-->
+      <div class="navbar-start">
+        <a class="navbar-item {{'navbar-item-active' if fAQsActive else ''}}" {{'' if fAQsActive else 'href=/faqs'}}>
+          FAQs
+        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Admin
+          </a>
+          <div class="navbar-dropdown is-black animated fadeIn faster">
+            <a class="navbar-item {{'navbar-item-active' if manageUsersActive else ''}}" {{'' if manageUsersActive else 'href=/admin/users'}}>
+              Manage Users ...
+            </a>
+            <a class="navbar-item {{'navbar-item-active' if manageFAQsActive else ''}}" {{'' if manageFAQsActive else 'href=/admin/faqs'}}>
+              Manage FAQs ...
+            </a>
+          </div>
+        </div>
+      </div>
+      <!--navbar-end below is for a set of menu items that are right oriented-->
+      <div class="navbar-end">
+        <div class="buttons">
+          <a class="button is-primary is-rounded">
+            Log in
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+
+      // Add a click event on each of them
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+
+        });
+      });
+    }
+  });
+</script>

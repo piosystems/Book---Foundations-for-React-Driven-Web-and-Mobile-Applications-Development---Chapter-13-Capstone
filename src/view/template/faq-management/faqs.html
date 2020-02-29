@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block body %}
+
+<body style="display: flex; min-height: 100vh; flex-direction: column;">
+    {%include "guest-website/navigation.html"%}
+    <section class="section">
+        <nav class="container breadcrumb" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">FAQ Admin</a></li>
+            </ul>
+            </nav>
+    </section>
+    <section class="section" style="flex: 1;">
+        <div class="container is-fluid">
+            <!-- Put an add new link-->
+            <div class="buttons">
+                <a onclick="addIsActiveClassToElement('faq-add')">
+                    <span class="icon">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span>Add New FAQ</span>
+                </a>
+            </div>
+            
+            <!-- Put a modal add form here. Inactive by default-->
+            <div id="faq-add" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">Add New FAQ</p>
+                        </header>
+                        <section class="modal-card-body">
+                            <form method="post" action="/admin/faq" >
+                                <div class="field">
+                                    <label class="label">Question</label>
+                                    <div class="control">
+                                        <input name="question" class="input" type="text" placeholder="Enter a question here" maxlength="128" required>
+                                    </div>
+                                    <p class="help">The question should not be more than 128 letters</p>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Answer</label>
+                                    <div class="control">
+                                        <textarea name="answer" class="input" type="text" placeholder="Enter answer to question here" required>
+                                        </textarea>
+                                    </div>
+                                    <p class="help">Enter clear answer to question here</p>
+                                </div>
+                                <div class="field">
+                                    <label class="label">FAQ Category</label>
+                                    <div class="control">
+                                        <div class="select">
+                                            <select name="fAQCategory" required placeholder="--Select FAQ Category">
+                                                {% for fAQCategory in fAQCategories%}
+                                                    <option value="{{fAQCategory.id}}">{{fAQCategory.name}}</option>
+                                                {%endfor%}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <p class="help">Select the applicable category</p>
+                                </div>
+                        </section>
+                        <footer class="modal-card-foot">
+                            <input type="submit" class="button" value="Submit">
+                            <input class="button" value="Cancel" onclick="removeIsActiveClassFromElement('faq-add')">
+                        </footer>
+                        </form>
+                </div>
+                <button class="modal-close" aria-label="close" onclick="removeIsActiveClassFromElement('faq-add')"></button>
+            </div>
+
+            <!-- Show existing faqs using Bulma extension's accordion--> 
+            <div class="accordions">
+                {% for fAQ in fAQs %}
+                    <article class="accordion is-active">
+                        <div class="accordion-header toggle">
+                            <p>{{fAQ.question}}</p>
+                            <button class="toggle" aria-label="toggle"></button>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                {{fAQ.answer}}
+                            </div>
+                            <div class="accordion-content">
+                                <a class="button is-danger is-small is-outlined" href="/faqs/delete/{{fAQ.id}}/" onclick="return confirm('Are you sure you want to delete?')">
+                                    <span>Delete</span>
+                                    <span class="icon is-small">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                </a>
+                                <a class="button is-danger is-small is-outlined" onclick="addIsActiveClassToElement('confirm-delete-{{fAQ.id}}')">
+                                    <span>Delete</span>
+                                    <span class="icon is-small">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                </a>
+                                <div id="confirm-delete-{{fAQ.id}}" class="modal">
+                                    <div class="modal-background"></div>
+                                    <div class="modal-content">
+                                        <div class="box confirmation-box">
+                                            Are you sure that you want to delete FAQ by name {{fAQ.name}}? <br/><br/>
+                                            <a class="button" href="/faqs/delete/{{fAQ.id}}/">Yes</a>
+                                            <a class="button" onclick="removeIsActiveClassFromElement('confirm-delete-{{fAQ.id}}')">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </article>
+                {%endfor%}
+            </div>
+        </div>
+    </section>
+    <script>
+        function addIsActiveClassToElement(elementId){
+            //today = new Date().toLocaleDateString("en-US");
+            var element = document.getElementById(elementId);
+            element.classList.add("is-active");
+        }
+        function removeIsActiveClassFromElement(elementId){
+            var element = document.getElementById(elementId);
+            element.classList.remove("is-active");
+        }
+    </script>
+    <script>
+        var accordions = bulmaAccordion.attach();
+    </script>
+</body>
+{%include "guest-website/footer.html" %}
+{% endblock body %}

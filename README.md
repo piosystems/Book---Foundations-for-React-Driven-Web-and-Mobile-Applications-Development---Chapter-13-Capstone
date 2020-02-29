@@ -1,3 +1,3 @@
-# Capstone project for Book1
+# Capstone project for Book
 
 
