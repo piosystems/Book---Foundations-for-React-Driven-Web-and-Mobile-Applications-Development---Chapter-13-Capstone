@@ -52,7 +52,7 @@
    },
    "dependencies": {
       "@fortawesome/fontawesome-free": "^5.11.2",
-      "bcrypt": "^3.0.7",
+      "bcrypt": "^5.0.0",
       "bulma-extensions": "^6.2.7",
       "class-validator": "^0.10.2",
       "formidable": "^1.2.1",
