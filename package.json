@@ -54,7 +54,7 @@
       "@fortawesome/fontawesome-free": "^5.11.2",
       "bcrypt": "^3.0.7",
       "bulma-extensions": "^6.2.7",
-      "class-validator": "^0.10.2",
+      "class-validator": "^0.14.0",
       "formidable": "^1.2.1",
       "koa": "^2.11.0",
       "koa-body": "^4.1.1",
